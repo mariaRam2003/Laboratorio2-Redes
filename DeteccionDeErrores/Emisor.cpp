@@ -28,6 +28,9 @@ int main() {
     std::cout << "Ingrese un mensaje en binario: ";
     std::cin >> binary_message;
 
+    // Guardamos el mensaje original antes del padding
+    std::string original_message = binary_message;
+
     // Determinamos el tamaño del bloque (8, 16 o 32)
     size_t block_size = 8;
     if (binary_message.size() % 16 == 0) block_size = 16;
@@ -42,11 +45,13 @@ int main() {
     std::vector<uint16_t> checksum = fletcher_checksum(data, block_size);
 
     // Concatenamos el checksum al mensaje original
+    std::cout << "Mensaje original: " << original_message << "\n";
     std::cout << "Mensaje con checksum: " << binary_message;
     for (const auto& sum : checksum) {
         std::bitset<8> bits(sum);
         std::cout << bits.to_string();
     }
+    std::cout << "\n";
 
     return 0;
 }
