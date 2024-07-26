@@ -3,8 +3,25 @@ from typing import List
 
 def main():
     # TODO: add the corresponding test cases
-    test_message = [1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1]
-    encode(test_message)
+    test_messages = [
+        [0, 1, 0, 0, 1, 0, 1],
+        [1, 0, 1],
+        [0, 0, 1, 0, 1],
+
+        [0, 1, 0, 1, 1],
+        [1, 1, 0, 0],
+        [0, 1, 1, 0, 0, 1],
+
+        [0, 0, 1, 0, 1],
+        [1, 1, 0],
+        [0, 0, 1, 1, 0, 1, 0]
+    ]
+
+    for index, test_message in enumerate(test_messages):
+        print("Mensaje no. ", index + 1, end="\n\t")
+        print("original: ", test_message, end="\n\t")
+        res = encode(test_message)
+        print("codificado: ", res)
 
 
 def is_power_of_two(n):
@@ -85,7 +102,7 @@ def calculate_parity_bits(encoded_message: list, parity_bit_no: int):
                 count_ones += 1
 
         index += 1
-        count = count + 1 % parity_bit_no
+        count = (count + 1) % parity_bit_no
 
     return count_ones % 2
 
