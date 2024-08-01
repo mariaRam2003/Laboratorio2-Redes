@@ -22,8 +22,7 @@ def main():
 
         run(message, mssg_chsm)
 
-     
-       
+
 
 def format_inforcer(message: list, identifier: int)-> list:
     formated_str = ""
