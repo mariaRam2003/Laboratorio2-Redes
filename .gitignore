@@ -1,4 +1,22 @@
+# for IDEs
 .idea/
-__pycache__/
+.vscode
 *.iml
+
+# for Python
+__pycache__/
+__pycache__/*   
+.pytest_cache
+venv/
+env/
+
+# for java
 CorreccionDeErroresReciever/out/*
+*.class
+
+# for C
+*.exe
+*.out
+
+# environment variables
+.env

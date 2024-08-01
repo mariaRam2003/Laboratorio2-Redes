@@ -11,7 +11,7 @@ public class Main{
         // un error
         testCases.add(new int[] {1, 0, 0, 0, 1, 0, 1, 1, 1});
         testCases.add(new int[] {0, 1, 0, 1, 1, 0, 0});
-        testCases.add(new int[] {1, 0, 0, 0, 1, 1, 0, 1, 0, 0});
+        testCases.add(new int[] {1, 0, 0, 0, 1, 1, 0, 1, 0, 1});
 
         // dos errores
         testCases.add(new int[] {0, 1, 0, 1, 0, 1, 0, 1, 0});
