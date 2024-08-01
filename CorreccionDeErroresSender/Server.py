@@ -4,10 +4,11 @@ from Hamming import encode
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 ADRESS = "127.0.0.1"
+PORT = 1111
 
 def main():
     
-    server.bind((ADRESS, 1111))
+    server.bind((ADRESS, PORT))
 
     while True:
         message = alg_menu()
@@ -15,7 +16,9 @@ def main():
         message = noise_layer(message)
         message = format_inforcer(message, 1)
 
-        pass        
+        message = message.encode()
+        server.sendto(message, (ADRESS, 1112))
+        
 
 
 def alg_menu():

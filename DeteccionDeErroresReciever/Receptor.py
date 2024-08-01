@@ -9,10 +9,7 @@ def fletcher_checksum(data, block_size):
 def binary_string_to_bytes(binary_str, block_size):
     return [int(binary_str[i:i+block_size], 2) for i in range(0, len(binary_str), block_size)]
 
-def main():
-    original_message = input("Ingrese el mensaje original en binario (sin checksum): ")
-    binary_message_with_checksum = input("Ingrese el mensaje en binario con el checksum: ")
-
+def run(original_message, binary_message_with_checksum ):
     block_size = 8
     if len(binary_message_with_checksum) % 16 == 0: block_size = 16
     if len(binary_message_with_checksum) % 32 == 0: block_size = 32
@@ -27,5 +24,3 @@ def main():
     else:
         print("Se detectaron errores en el mensaje. Mensaje descartado.")
 
-if __name__ == "__main__":
-    main()
