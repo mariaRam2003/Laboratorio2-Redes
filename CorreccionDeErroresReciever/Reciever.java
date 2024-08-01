@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Reciever{
     int[] message;
@@ -10,7 +11,7 @@ public class Reciever{
         run();
     }
 
-    private void run(){
+    public String run(){
         int parityNo = this.parityQuantity;
         Integer[] parityBits = new Integer[parityNo];  // We alocate the memory for the parity bits in the array
 
@@ -41,17 +42,16 @@ public class Reciever{
                 this.message[errorIndex - 1] = 1;
             }
 
-            // we print the corrected version
-            System.out.print("La version corregida del mensaje es: ");
-            for (int i = 0; i < this.message.length; i++){
-                System.out.print(this.message[i]);
-            }
-            System.out.println("");
+
         }
 
-//        for (int i = 0; i < parityBits.length; i++){
-//            System.out.println(parityBits[i]);
-//        }
+        return arrayToString(this.message);
+    }
+
+    public static String arrayToString(int[] array) {
+        return Arrays.stream(array)
+                     .mapToObj(String::valueOf)
+                     .collect(Collectors.joining(","));
     }
 
     public static int xor(int[] message){
