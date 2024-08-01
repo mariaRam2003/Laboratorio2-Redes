@@ -1,28 +1,72 @@
 from typing import List
+from Client import Client
+import random
 
+ADRESS = '127.0.0.1'
+PORT = 1111
 
 def main():
-    # TODO: add the corresponding test cases
-    test_messages = [
-        [0, 1, 0, 0, 1, 0, 1],
-        [1, 0, 1],
-        [0, 0, 1, 0, 1],
+    client = Client(ADRESS, PORT)
+    message = alg_menu()
+    message = [int(bit) for bit in message]
+    message = encode(message)
+    message = noise_layer(message)
+    message = format_inforcer(message)    
+    client.send(message)
 
-        [0, 1, 0, 1, 1],
-        [1, 1, 0, 0],
-        [0, 1, 1, 0, 0, 1],
 
-        [0, 0, 1, 0, 1],
-        [1, 1, 0],
-        [0, 0, 1, 1, 0, 1, 0]
-    ]
+def validate_message(user_message: str):
+    for char in user_message:
+        if char != "0" and char != "1":
+            return False
+    return True
 
-    for index, test_message in enumerate(test_messages):
-        print("Mensaje no. ", index + 1, end="\n\t")
-        print("original: ", test_message, end="\n\t")
-        res = encode(test_message)
-        print("codificado: ", res)
+def alg_menu():
+    print("Ingresa el mensaje que deseas enviar: ")
 
+    try:
+        message = input()
+
+        if message == "":
+            raise ValueError
+        
+        if not validate_message(message):            
+            raise ValueError
+
+        return message
+    
+    except ValueError:
+        print("Por favor, introduce un mensaje valido")
+        return alg_menu()
+    
+def noise_layer(message: list)-> list:
+    """We flip a bit in the message with a 1% probability
+
+    Args:
+        message (list): a list of 1s and 0s
+
+    Returns:
+        message (list): a list of 1s and 0s
+    """
+    for bit_idx in range(len(message)):
+        if random.random() < 0.01:
+            if message[bit_idx] == 0:
+                message[bit_idx] = 1
+            else:
+                message[bit_idx] = 0
+
+    return message
+            
+            
+
+def format_inforcer(message: list)-> str:
+    formated_str = ""
+
+    for i in message:
+        formated_str += str(i) + ","
+    formated_str = formated_str[:-1]
+
+    return formated_str
 
 def is_power_of_two(n):
     """

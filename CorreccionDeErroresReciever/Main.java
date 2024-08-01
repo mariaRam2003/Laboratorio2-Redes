@@ -2,26 +2,23 @@ import java.util.ArrayList;
 
 public class Main{
     public static void main(String[] args){
-        ArrayList<int[]> testCases = new ArrayList<>(9);
-        // sin errores
-        testCases.add(new int[] {1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1});
-        testCases.add(new int[] {1, 0, 1, 1, 0, 1});
-        testCases.add(new int[] {1, 1, 0, 1, 0, 1, 0, 1, 1});
+        UDPServer server = new UDPServer();
 
-        // un error
-        testCases.add(new int[] {1, 0, 0, 0, 1, 0, 1, 1, 1});
-        testCases.add(new int[] {0, 1, 0, 1, 1, 0, 0});
-        testCases.add(new int[] {1, 0, 0, 0, 1, 1, 0, 1, 0, 1});
+        while (true){         
+            String receivedData = server.recv();
+            int[] msg = cleanMessage(receivedData);
+            Reciever reciever = new Reciever(msg);
 
-        // dos errores
-        testCases.add(new int[] {0, 1, 0, 1, 0, 1, 0, 1, 0});
-        testCases.add(new int[] {1, 1, 1, 1, 1, 1});
-        testCases.add(new int[] {1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1});
-
-        for (int i = 0; i < testCases.size(); i++){
-            System.out.println("~~~~~~~~~~~ TEST CASE " + String.valueOf(i + 1) + "~~~~~~~~~~~");
-            int[] message = testCases.get(i);
-            Reciever reciever = new Reciever(message);
         }
+    }
+
+    public static int[] cleanMessage(String userMessage) {
+        String[] messageParts = userMessage.split(",");
+        int[] message = new int[messageParts.length];
+
+        for (int i = 0; i < messageParts.length; i++) {
+            message[i] = Integer.parseInt(messageParts[i]);
+        }
+        return message;
     }
 }

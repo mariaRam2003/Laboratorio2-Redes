@@ -10,7 +10,7 @@ public class Reciever{
         run();
     }
 
-    private void run(){
+    public int[] run(){
         int parityNo = this.parityQuantity;
         Integer[] parityBits = new Integer[parityNo];  // We alocate the memory for the parity bits in the array
 
@@ -49,9 +49,7 @@ public class Reciever{
             System.out.println("");
         }
 
-//        for (int i = 0; i < parityBits.length; i++){
-//            System.out.println(parityBits[i]);
-//        }
+        return this.message;
     }
 
     public static int xor(int[] message){
