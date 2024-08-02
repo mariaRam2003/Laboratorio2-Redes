@@ -21,6 +21,10 @@ def validate_message(user_message: str):
             return False
     return True
 
+def encode_to_binary(ascii_message):
+    binary_message = ''.join(format(ord(c), '08b') for c in ascii_message)
+    return binary_message
+
 def alg_menu():
     print("Ingresa el mensaje que deseas enviar: ")
 
@@ -30,8 +34,7 @@ def alg_menu():
         if message == "":
             raise ValueError
         
-        if not validate_message(message):            
-            raise ValueError
+        message = encode_to_binary(message)
 
         return message
     
