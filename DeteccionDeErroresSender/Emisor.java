@@ -25,10 +25,21 @@ public class Emisor {
         return result;
     }
 
+    public static String encodeToBinary(String asciiMessage) {
+        StringBuilder binaryMessage = new StringBuilder();
+        for (char c : asciiMessage.toCharArray()) {
+            String binaryString = String.format("%8s", Integer.toBinaryString(c)).replace(' ', '0');
+            binaryMessage.append(binaryString);
+        }
+        return binaryMessage.toString();
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese un mensaje en binario: ");
-        String binaryMessage = scanner.nextLine();
+        System.out.print("Ingrese un mensaje : ");
+        String message = scanner.nextLine();
+        String binaryMessage = encodeToBinary(message);
+        System.out.println("Mensaje en binario: " + binaryMessage);
 
         // Guardamos el mensaje original antes del padding
         String originalMessage = binaryMessage;
